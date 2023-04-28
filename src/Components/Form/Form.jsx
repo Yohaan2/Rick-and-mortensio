@@ -1,5 +1,7 @@
 import { useState } from "react";
 import validate from './Validate'
+import style from './Form.module.css'
+import logo from '../../image/logo-tranparente.png'
 
 
 
@@ -33,15 +35,18 @@ const Form = ({login}) => {
    const [ errors, setErrors] = useState({})
 
    return (
-		<>
-			<form onSubmit={handleSubtmit}>
-				<label>Email</label>
+		<div className={style.containForm}>
+			<form onSubmit={handleSubtmit} className={style.containInput}>
+				<img src={logo} alt='logo de rick and morty' className={style.logo} />
+				<label className={style.labelE}>Email</label>
 				<input
 					type='email'
-					placeholder='Email'
+					placeholder='Correo Electronico'
 					value={userData.email}
 					onChange={handleChange}
 					name='email'
+					className={style.email}
+					autoComplete="off"
 				/>
 				{errors.email ? (
 					<p>{errors.email}</p>
@@ -51,25 +56,22 @@ const Form = ({login}) => {
 					<p>{errors.caracteres}</p>
 				)}
 
-				<label>Password</label>
+				<label className={style.labelP}>Password</label>
 				<input
 					type='password'
-					placeholder='Password'
+					placeholder='Contraseña'
 					value={userData.password}
 					onChange={handleChange}
 					name='password'
+					className={style.password}
 				/>
-				{errors.email ? (
-					<p>{errors.password}</p>
-				) : errors.emailVacio ? (
-					<p>{errors.emailVacio}</p>
-				) : (
-					<p>{errors.caracteres}</p>
-				)}
-
-				<button type='submit'>Submit</button>
+				{errors.password && <p>{errors.password}</p>}
+				<br />
+				<button type='submit' className={style.boton}>
+					Siguiente
+				</button>
 			</form>
-		</>
+		</div>
 	);
 };
 

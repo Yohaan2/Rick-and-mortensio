@@ -5,14 +5,8 @@ import { useState, useEffect } from 'react';
 const Detail = () => {
 	const {id} = useParams();
 
-;
-
 	const [character, setCharacter] = useState({});
-	console.log(character);
 	
-
-   
-
 	useEffect(() => {
 		axios(`https://rickandmortyapi.com/api/character/${id}`).then(({ data }) => {
 			if (data.name) {

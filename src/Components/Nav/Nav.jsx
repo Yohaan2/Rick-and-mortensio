@@ -1,9 +1,9 @@
 import React from 'react';
 import SearchBar from '../SearchBar/SearchBar';
 import { NavLink } from 'react-router-dom';
-import logo from '../../image/logo-tranparente.png'
+import logo from '../../image/logo-tranparente.png';
 
-const Nav = ({ onSearch }) => {
+const Nav = ({ onSearch, logout }) => {
 	return (
 		<nav>
 			<NavLink to={'/about'}>
@@ -12,9 +12,14 @@ const Nav = ({ onSearch }) => {
 			<NavLink to={'/home'}>
 				<button>Home</button>
 			</NavLink>
+			<NavLink to={'/favorites'}>
+				<button>Favorites</button>
+			</NavLink>
+		
+				<button onClick={logout}>Log Out</button>
 			
 			<div className='container-logo'>
-				<img src={logo} alt="logo de rick" />
+				<img src={logo} alt='logo de rick' />
 			</div>
 			<SearchBar onSearch={onSearch} />
 		</nav>

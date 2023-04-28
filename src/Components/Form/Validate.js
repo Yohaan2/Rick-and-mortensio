@@ -19,7 +19,7 @@ const validate = (data) => {
    
    }
    if (!passLengthRegex.test(data.password)){
-      errors.password = 'tiene que ser entre 6 y 10 caracteres'
+      errors.password = 'Tiene que ser entre 6 y 10 caracteres'
    }
    
    return errors;

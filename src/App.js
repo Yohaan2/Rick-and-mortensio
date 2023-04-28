@@ -7,25 +7,31 @@ import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import About from './Components/About/about';
 import Detail from './Components/Detail/Detail';
 import Form from './Components/Form/Form';
-
+import Favorites from './Components/Favorites/Favorites';
 
 function App() {
 	const [characters, setCharacters] = useState([]);
-	// console.log(characters);
-	
-	const [access, setAccess] = useState(false)
-	
-	const EMAIL = 'garciayohan57@gmail.com'
-	const PASSWORD = '1234'
-	const navigate = useNavigate()
+	console.log('soy el estado', characters);
 
-	const { pathname } = useLocation()
+	const [access, setAccess] = useState(false);
+
+	const EMAIL = 'garciayohan57@gmail.com';
+	const PASSWORD = '1234';
+	const navigate = useNavigate();
+
+	const { pathname } = useLocation();
 
 	function onSearch(id) {
 		axios(`https://rickandmortyapi.com/api/character/${id}`).then(({ data }) => {
 			if (data.name) {
-				// console.log(data.name);
-				setCharacters((characters) => [...characters, data]);
+				const filetred = characters.filter((character) => {
+					return character.name === data.name;
+				});
+				if (filetred.length === 0) {
+					setCharacters((characters) => [...characters, data]);
+				} else {
+					window.alert('Ya este personaje existe');
+				}
 			} else {
 				window.alert('¡No hay personajes con este ID!');
 			}
@@ -33,15 +39,20 @@ function App() {
 	}
 
 	const login = (userData) => {
-		if(userData.password === PASSWORD && userData.email === EMAIL){
-			setAccess(true)
-			navigate('/home')
+		if (userData.password === PASSWORD && userData.email === EMAIL) {
+			setAccess(true);
+			navigate('/home');
 		}
+	};
+
+	const logout = () => {
+		setAccess(false)
+		navigate('/')
 	}
 
 	useEffect(() => {
-		!access && navigate('/')
-	}, [access])
+		!access && navigate('/');
+	}, [access]);
 
 	const onClose = (id) => {
 		setCharacters(characters.filter((characters) => characters.id !== Number(id)));
@@ -49,13 +60,14 @@ function App() {
 
 	return (
 		<div className='App'>
-				{pathname !== '/' && <Nav onSearch={onSearch} />}
-			
+			{pathname !== '/' && <Nav onSearch={onSearch} logout={logout}/>}
+
 			<Routes>
-				<Route path='/' element={<Form login={login}/>}/>
+				<Route path='/' element={<Form login={login} />} />
 				<Route path='/home' element={<Cards characters={characters} onClose={onClose} />} />
-				<Route path='/about' element={<About />}/>
-				<Route path='/detail/:id' element={	<Detail />} />
+				<Route path='/about' element={<About />} />
+				<Route path='/detail/:id' element={<Detail />} />
+				<Route path='/favorites' element={<Favorites />}/>
 			</Routes>
 		</div>
 	);
@@ -63,8 +75,6 @@ function App() {
 
 export default App;
 
-
 //uselocation es un objetoç
 //wadsdaw asd adaw dasda wd awdda sd asda wd asda wdw dad
 //1234567890'¡qwertyuiop``+KBKJBasdfghjklñ´´ç1!!<<>zxcvbnm,.-789456123-+*/-.,mººª\.0
-
