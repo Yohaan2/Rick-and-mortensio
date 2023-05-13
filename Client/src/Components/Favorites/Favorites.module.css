@@ -1,0 +1,42 @@
+.container {
+	height: 100%;
+}
+
+.filter {
+	padding: 25px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+filter {
+	max-width: 250px;
+	position: relative;
+}
+.filter select {
+	display: inline-block;
+	width: 10%;
+	cursor: pointer;
+	padding: 7px 10px;
+	height: 42px;
+	outline: 0;
+	border: 0;
+	border-radius: 0;
+	background: #4fd4c3;
+	font-size: 1em;
+	color: #000000;
+	font-family: 'Quicksand', sans-serif;
+	border: 2px solid rgba(0, 0, 0, 0.2);
+	border-radius: 12px;
+	position: relative;
+	transition: all 0.25s ease;
+	margin-left: 5px;
+}
+.filter select:hover {
+	background: #b1e8cd;
+}
+
+.card {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
