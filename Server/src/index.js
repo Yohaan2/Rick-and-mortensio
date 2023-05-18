@@ -1,10 +1,11 @@
-const express = require('express')
-const server = express()
-const PORT = 3001
-const routes = require('./routes/index')
+const express = require('express');
+const server = express();
+const PORT = 3001;
+const routes = require('./routes/index');
 //const server = require('./app')
+const { conn } = require('./DB_connection');
 
-server.use(express.json())
+server.use(express.json());
 
 server.use((req, res, next) => {
 	res.header('Access-Control-Allow-Origin', '*');
@@ -16,6 +17,7 @@ server.use((req, res, next) => {
 
 server.use('/rickandmorty', routes);
 
-server.listen(PORT, ()=>{
+server.listen(PORT, async () => {
+	await conn.sync({ force: true });
 	console.log(`Server raised in port ${PORT}`);
-})
+});
