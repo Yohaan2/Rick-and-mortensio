@@ -14,9 +14,6 @@ function App() {
 	console.log('soy el estado', characters);
 
 	const [access, setAccess] = useState(false);
-
-	const EMAIL = 'garciayohan57@gmail.com';
-	const PASSWORD = '1234';
 	const navigate = useNavigate();
 
 	const { pathname } = useLocation();
@@ -45,10 +42,9 @@ function App() {
 	const login = async (userData) => {
 		try {
 			const { email, password } = userData;
-			const URL = 'http://localhost:3001/rickandmorty/login/';
+			const URL = 'http://localhost:3001/rickandmorty/login';
 			const response = await axios(URL + `?email=${email}&password=${password}`);
 			const { data } = response;
-
 			const { access } = data;
 
 			setAccess(access);
